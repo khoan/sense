@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sense UI</title>
+  <link rel="stylesheet" href="bulma/0.4.4/css/bulma.css">
+  <link rel="stylesheet" href="font-awesome.css">
+  <style>
+    textarea.textarea.ui {
+      max-height: 50vh;
+      min-height: 50vh;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero is-primary">
+    <div class="hero-head">
+      <header class="nav">
+        <div class="container">
+          <div class="nav-left">
+            <a class="nav-item" href="/">
+              Sense UI
+            </a>
+          </div>
+          <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <div class="nav-right nav-menu">
+            <a class="nav-item is-active" href="/">
+              Home
+            </a>
+            <a class="nav-item is-active" href="help.html">
+              Help
+            </a>
+            <span class="nav-item">
+              <a class="button is-primary is-inverted" href="https://github.com/khoan/sense">
+                <span class="icon">
+                  <i class="fa fa-github"></i>
+                </span>
+                <span>Source</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          A JSON aware interface to Elasticsearch.
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="columns">
+      <div class="column is-half">
+        <div class="field">
+          <label class="label" for="url">URL</label>
+          <div class="control">
+            <input id="url" class="input" type="text" placeholder="Elasticsearch URL" value="localhost:9200">
+          </div>
+          <p class="help">https://user:pass@es.com</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <label class="label" for="query">Query</label>
+          <div class="control">
+            <textarea id="query" class="textarea ui" name="query"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="field">
+          <label class="label" for="result">Result</label>
+          <div class="control">
+            <textarea id="result" class="textarea ui" name="result"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</body>
+</html>
