@@ -11,6 +11,13 @@
       min-height: 50vh;
     }
   </style>
+
+  <script src="sense.js"></script>
+  <script src="sense/tool.js"></script>
+  <script src="sense/api.js"></script>
+  <script src="sense/api/request.js"></script>
+  <script src="sense/ui.js"></script>
+  <script src="sense/ui/editor.js"></script>
 </head>
 <body>
   <section class="hero is-primary">
@@ -56,7 +63,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section id="ui" class="section">
     <div class="columns">
       <div class="column is-half">
         <div class="field">
@@ -90,5 +97,10 @@
     </div>
 
   </section>
+
+  <script>
+    var sense = new Sense;
+    sense.start();
+  </script>
 </body>
 </html>
