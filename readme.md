@@ -1,5 +1,13 @@
 Simple, stable UI to query elasticsearch server.
 
+# Usage
+
+```
+$ git clone git@github.com:khoan/sense.git
+$ cd sense
+$ open public/index.html
+```
+
 # Alternatives
 
 - [Postman](http://www.getpostman.com)
