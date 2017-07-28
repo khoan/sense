@@ -12,3 +12,7 @@ Start chrome with `--ignore-certificate-errors`
 # Limitations
 
 - CORS must be supported by Elasticsearch server
+
+# Resource
+
+- [github](https://github.com/elastic/sense)
