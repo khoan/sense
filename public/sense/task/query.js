@@ -7,6 +7,7 @@ Sense['Task.Query'] = function(api, ui) {
 
       api.send(
         ui.el.url.value,
+        req
 
       ).then(function(resp) {
         return resp.text();

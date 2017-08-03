@@ -8,20 +8,31 @@ Sense['Ui.Editor'] = function(api, ui) {
         return blob.split(this.pattern.separator);
       },
       valid: function() {
-        return ! ui.el.query.value[
-          ui.el.query.selectionStart
-        ].match(/\s/);
+        var requests = ui.el.query.value;
+        var pos = ui.el.query.selectionStart;
+
+        if (pos === 0) {
+          return ! requests[pos].match(/\s/);
+
+        } else if (pos === requests.length) {
+          return ! requests[pos-1].match(/\s/);
+
+        } else {
+          return ! requests[pos].match(/\s/) || ! requests[pos-1].match(/\s/);
+        }
       },
       start: function() {
         var pos = ui.el.query.selectionStart;
 
         for (;;) {
           if (pos < 1) {
-            return pos;
+            return 0;
           }
 
           if (ui.el.query.value[pos-1] === "\n") {
-            if (ui.el.query.value[pos-2] === "\n") {
+            if (pos == 1) {
+              return pos;
+            } else if (ui.el.query.value[pos-2] === "\n") {
               return pos;
             } else {
               pos = pos - 2;
