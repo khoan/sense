@@ -6,6 +6,56 @@ Sense['Ui.Editor'] = function(api, ui) {
       },
       parse: function(blob) {
         return blob.split(this.pattern.separator);
+      },
+      valid: function() {
+        return ! ui.el.query.value[
+          ui.el.query.selectionStart
+        ].match(/\s/);
+      },
+      start: function() {
+        var pos = ui.el.query.selectionStart;
+
+        for (;;) {
+          if (pos < 1) {
+            return pos;
+          }
+
+          if (ui.el.query.value[pos-1] === "\n") {
+            if (ui.el.query.value[pos-2] === "\n") {
+              return pos;
+            } else {
+              pos = pos - 2;
+            }
+          } else {
+            pos = pos - 1;
+          }
+        }
+      },
+      end: function() {
+        var pos = ui.el.query.selectionEnd;
+
+        for (;;) {
+          if (pos > ui.el.query.value.length) {
+            return pos;
+          }
+
+          if (ui.el.query.value[pos] === "\n") {
+            if (ui.el.query.value[pos+1] === "\n") {
+              return pos;
+            } else {
+              pos = pos + 2;
+            }
+          } else {
+            pos = pos + 1;
+          }
+        }
+      }
+    },
+    key: {
+      is: function(e, name) {
+        if (name === "meta+enter") {
+          return  e.metaKey && e.keyCode == 13;
+        }
       }
     }
   };
@@ -14,34 +64,32 @@ Sense['Ui.Editor'] = function(api, ui) {
     var me = this;
 
     ui.el.query.addEventListener("keydown", function(e) {
-      // meta+enter
-      if (e.keyCode == 13 && e.metaKey) {
-        // TODO determine cursor position
-        me.send();
+      if (tool.key.is(e, "meta+enter")) {
+        new Sense['Task.Query'](api, ui).run();
       }
     });
   };
 
-  this.send = function(cursor) {
-    ui.loading(true);
+  this.request = function(number) {
+    if (typeof number === "number") {
+      return this.requests()[number];
 
-    // TODO get request under cursor
-    cursor || (cursor = 0);
-
-    api.send(
-      ui.el.url.value,
-      this.requests()[cursor]
-    ).then(function(resp) {
-      return resp.text();
-    }).then(function(text) {
-      ui.loading(false);
-      ui.result(text);
-    });
+    } else {
+      if (tool.request.valid()) {
+        return ui.el.query.value.substring(
+          tool.request.start(),
+          tool.request.end()
+        );
+      }
+    }
   };
 
   this.requests = function() {
     return tool.request.parse(ui.el.query.value);
   };
+
+
+
 
   this.bind();
 };

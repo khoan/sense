@@ -8,6 +8,10 @@ $ cd sense
 $ open public/index.html
 ```
 
+# Tested
+
+- Safari 10.1.2
+
 # Alternatives
 
 - [Postman](http://www.getpostman.com)
