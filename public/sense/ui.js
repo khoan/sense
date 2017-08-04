@@ -1,4 +1,4 @@
-Sense.Ui = function(api, undef) {
+Sense.Ui = function(sense, undef) {
   this.data = {
     result: undef
   };
@@ -11,7 +11,7 @@ Sense.Ui = function(api, undef) {
     result: this.el.result.parentElement
   }
 
-  this.editor = new Sense['Ui.Editor'](api, this);
+  this.editor = new Sense['Ui.Editor'](sense, this);
 
   this.loading = function(on) {
     if (on) {

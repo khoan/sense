@@ -1,4 +1,4 @@
-Sense['Ui.Editor'] = function(api, ui) {
+Sense['Ui.Editor'] = function(sense, ui) {
   var tool = {
     request: {
       pattern: {
@@ -7,7 +7,7 @@ Sense['Ui.Editor'] = function(api, ui) {
       parse: function(blob) {
         return blob.split(this.pattern.separator);
       },
-      valid: function() {
+      isFound: function() {
         var requests = ui.el.query.value;
         var pos = ui.el.query.selectionStart;
 
@@ -65,7 +65,9 @@ Sense['Ui.Editor'] = function(api, ui) {
     key: {
       is: function(e, name) {
         if (name === "meta+enter") {
-          return  e.metaKey && e.keyCode == 13;
+          return  e.metaKey && e.keyCode === 13;
+        } else if (name === "tab") {
+          return e.keyCode === 9;
         }
       }
     }
@@ -76,27 +78,26 @@ Sense['Ui.Editor'] = function(api, ui) {
 
     ui.el.query.addEventListener("keydown", function(e) {
       if (tool.key.is(e, "meta+enter")) {
-        new Sense['Task.Query'](api, ui).run();
+        new Sense['Task.Query'](sense).run();
+      } else if (tool.key.is(e, "tab")) {
+        new Sense['Task.AutoComplete'](sense).run();
+        e.preventDefault();
       }
     });
   };
 
   this.request = function(number) {
     if (typeof number === "number") {
-      return this.requests()[number];
+      return tool.request.parse(ui.el.query.value)[number];
 
     } else {
-      if (tool.request.valid()) {
+      if (tool.request.isFound()) {
         return ui.el.query.value.substring(
           tool.request.start(),
           tool.request.end()
         );
       }
     }
-  };
-
-  this.requests = function() {
-    return tool.request.parse(ui.el.query.value);
   };
 
 

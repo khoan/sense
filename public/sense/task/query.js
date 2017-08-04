@@ -1,20 +1,20 @@
-Sense['Task.Query'] = function(api, ui) {
+Sense['Task.Query'] = function(sense) {
   this.run = function(reqNum) {
-    var req = ui.editor.request(reqNum);
+    var req = sense.ui.editor.request(reqNum);
 
     if (req) {
-      ui.loading(true);
+      sense.ui.loading(true);
 
-      api.send(
-        ui.el.url.value,
+      sense.api.send(
+        sense.ui.el.url.value,
         req
 
       ).then(function(resp) {
         return resp.text();
 
       }).then(function(text) {
-        ui.loading(false);
-        ui.result(text);
+        sense.ui.loading(false);
+        sense.ui.result(text);
       });
     } else {
       alert("Please place cursor over request.");
