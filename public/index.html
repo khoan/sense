@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sense UI</title>
+  <title>eShell</title>
   <link rel="stylesheet" href="bulma/0.4.4/css/bulma.css">
   <link rel="stylesheet" href="font-awesome.css">
   <style>
@@ -19,8 +19,9 @@
   <script src="sense/ui.js"></script>
   <script src="sense/ui/editor.js"></script>
   <script src="sense/task/query.js"></script>
+  <script src="sense/task/indent.js"></script>
   <script src="sense/task/auto_complete.js"></script>
-  <script src="sense/task/auto_complete/word.js"></script>
+  <script src="sense/task/auto_complete/match_boundary.js"></script>
   <script src="sense/task/auto_complete/suggestion.js"></script>
   <script src="sense/task/auto_complete/suggestion/match.js"></script>
 </head>
@@ -31,7 +32,7 @@
         <div class="container">
           <div class="nav-left">
             <a class="nav-item" href="/">
-              Sense UI
+              eShell
             </a>
           </div>
           <span class="nav-toggle">
@@ -76,7 +77,7 @@
           <div class="control">
             <input id="url" class="input" type="text" placeholder="Elasticsearch URL" value="localhost:9200">
           </div>
-          <p class="help">https://user:pass@es.com</p>
+          <p class="help">e.g. https://user:pass@es.com</p>
         </div>
       </div>
     </div>

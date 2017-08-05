@@ -101,7 +101,5 @@ Sense['Ui.Editor'] = function(sense, ui) {
   };
 
 
-
-
   this.bind();
 };

@@ -1,4 +1,4 @@
-Sense['Task.AutoComplete.Word'] = function(sense) {
+Sense['Task.AutoComplete.MatchBoundary'] = function(sense) {
   var tool = {
     word: {
       start: function() {
@@ -10,7 +10,7 @@ Sense['Task.AutoComplete.Word'] = function(sense) {
             return 0;
           }
 
-          if (q[pos-1].match(/\s/)) {
+          if (q[pos-1].match(/[\s\/]/)) {
             return pos;
           } else {
             pos = pos - 1;
@@ -26,7 +26,7 @@ Sense['Task.AutoComplete.Word'] = function(sense) {
             return q.length;
           }
 
-          if (q[pos].match(/\s/)) {
+          if (q[pos].match(/[\s\/]/)) {
             return pos;
           } else {
             pos = pos + 1;
@@ -37,14 +37,5 @@ Sense['Task.AutoComplete.Word'] = function(sense) {
   };
 
 
-
-
-  var start = tool.word.start();
-  var end = tool.word.end();
-
-  return [
-    sense.ui.el.query.value.substring(start, end),
-    start,
-    end
-  ];
+  return [tool.word.start(), tool.word.end()];
 }

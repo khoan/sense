@@ -1,4 +1,5 @@
-Sense['Task.AutoComplete.Suggestion.Match'] = function(sense, word) {
+Sense['Task.AutoComplete.Suggestion.Match'] = function(sense, boundary) {
+  var word = sense.ui.el.query.value.substring(boundary[0], boundary[1]);
   var dict = sense.suggestions.data.dict;
 
   var matches = [];
@@ -12,7 +13,8 @@ Sense['Task.AutoComplete.Suggestion.Match'] = function(sense, word) {
       return matches;
     }
 
-    end = dict.indexOf(' ', start+1);
+    end = dict.indexOf('|', start+1);
+    start = dict.lastIndexOf('|', start) + 1;
 
     if (end === -1) {
       matches.push(dict.substring(start));
@@ -21,5 +23,9 @@ Sense['Task.AutoComplete.Suggestion.Match'] = function(sense, word) {
 
     matches.push(dict.substring(start, end));
     start = end+1;
+
+    if (word === "{") {
+      return matches;
+    }
   }
 };
