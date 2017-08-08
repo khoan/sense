@@ -22,9 +22,14 @@ Sense['Task.AutoComplete'] = function(sense) {
 
       if (sense.suggestions.on("brace", suggestion)) {
         indent = Sense['Task.Indent'](sense);
-        console.log("indent brace", indent.length);
         caret = boundary[0] + snippet.length + 4 + indent.length + 2;
         snippet = `${snippet}: {\n${indent}  \n${indent}}`;
+      }
+
+      if (sense.suggestions.on("bracket", suggestion)) {
+        indent = Sense['Task.Indent'](sense);
+        caret = boundary[0] + snippet.length + 4 + indent.length + 4 + indent.length + 4;
+        snippet = `${snippet}: [\n${indent}  {\n${indent}    \n${indent}  }\n${indent}]`;
       }
 
       if (sense.suggestions.on("hint", suggestion)) {

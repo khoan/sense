@@ -22,9 +22,19 @@ Sense['Api.Request'] = function(url, request) {
       options: function(uri, options) {
         var auth;
         var headers = new Headers;
+        var opts = {
+          method: options.method,
+          headers: headers,
+        };
 
         if (options.payload) {
           headers.append("Content-Type", "application/json");
+
+          opts.body = options.payload;
+
+          if (opts.method === "GET") {
+            opts.method = "POST";
+          }
         }
 
         if (uri.username && uri.password) {
@@ -32,26 +42,23 @@ Sense['Api.Request'] = function(url, request) {
           headers.append("Authorization", `Basic ${auth}`);
         }
 
-        var opts = {
-          method: options.method === "GET" && options.payload ? "POST" : options.method,
-          headers: headers,
-        };
         return opts;
       },
-      pattern: {
-        separator: {
-          command: new RegExp(" +"),
-          payload: new RegExp("\n", "m")
-        }
-      },
       parse: function(request) {
-        var payload = request.split(this.pattern.separator.payload);
-        var command = payload[0].split(this.pattern.separator.command);
+        var sep = request.indexOf("\n");
+
+        var command = request.slice(0, sep).split(/ +/);
+
+        var payload;
+        
+        if (sep !== -1) {
+          payload = request.substring(sep+1).replace(/\n */g, "");
+        }
 
         return {
           method: command[0],
           path: command[1],
-          payload: payload[1]
+          payload: payload
         };
       }
     }
