@@ -30,9 +30,12 @@ Sense['Api.Request'] = function(url, request) {
         if (options.payload) {
           headers.append("Content-Type", "application/json");
 
+          // TODO stop switching GET to POST, and
+          //      pass payload as source query string param
+          // https://www.elastic.co/guide/en/elasticsearch/reference/1.7/search-request-body.html
           opts.body = options.payload;
 
-          if (opts.method === "GET") {
+          if (options.path.indexOf("_search") !== -1 && opts.method === "GET") {
             opts.method = "POST";
           }
         }
@@ -45,15 +48,16 @@ Sense['Api.Request'] = function(url, request) {
         return opts;
       },
       parse: function(request) {
+        var payload;
         var sep = request.indexOf("\n");
 
-        var command = request.slice(0, sep).split(/ +/);
-
-        var payload;
-        
-        if (sep !== -1) {
+        if (sep === -1) {
+          sep = undefined;
+        } else {
           payload = request.substring(sep+1).replace(/\n */g, "");
         }
+
+        var command = request.slice(0, sep).split(/ +/);
 
         return {
           method: command[0],

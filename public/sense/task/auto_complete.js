@@ -7,7 +7,7 @@ Sense['Task.AutoComplete'] = function(sense) {
 
       if (suggestion === "{") {
         indent = Sense['Task.Indent'](sense);
-        snippet = `{\n${indent}  \n}`;
+        snippet = `{\n${indent}  \n${indent}}`;
         caret = boundary[0] + 2 + indent.length + 2;
         return [snippet, caret];
       }

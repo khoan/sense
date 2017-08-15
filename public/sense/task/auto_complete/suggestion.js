@@ -4,8 +4,9 @@ Sense['Task.AutoComplete.Suggestion'] = function(sense) {
 GET |PUT |POST |DELETE |HEAD |\
 {|\
 _cluster|_search|_mapping|_aliases|_all|\
-"query{|"filtered{|"filter{|"bool{|"must[|"match{|"term{|"terms{|\
-"aggs{\
+"query{|"filtered{|"filter{|"bool{|"must[|"match{|"term{|"terms{|"field|\
+"aggs{\|
+"size|"fields|\
 '
   };
 
