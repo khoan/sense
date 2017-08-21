@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>eShell Help</title>
+  <link rel="stylesheet" href="bulma/0.4.4/css/bulma.css">
+  <link rel="stylesheet" href="font-awesome.css">
+</head>
+<body>
+  <section class="hero is-primary">
+    <div class="hero-head">
+      <header class="nav">
+        <div class="container">
+          <div class="nav-left">
+            <a class="nav-item" href="/">
+              eShell
+            </a>
+          </div>
+          <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <div class="nav-right nav-menu">
+            <a class="nav-item is-active" href="help.html">
+              Help
+            </a>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          Elasticsearch Shell Help
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <section id="ui" class="section">
+    <div class="content">
+      <h1>Usage</h1>
+    
+      <ul>
+        <li>Enter URL of Elasticsearch server</li>
+        <li>Enter Query, then press <span class="tag is-black">Ctrl+Enter</span> to obtain result</li>
+      </ul>
+
+      <hr>
+
+      <h2>URL</h2>
+
+      URL input supports format as outlined in <a href="https://tools.ietf.org/html/rfc3986#page-16">RFC3986</a>.
+
+      <hr>
+      
+      <h2>Query</h2>
+
+      <p>Query box reduces <a href="https://en.wikipedia.org/wiki/Repetitive_strain_injury">RSI</a> with <span class="tag is-black">tab</span> autocomplete.</p>
+
+      <p>You can have multiple queries in query box, but only the one under cursor will be submitted when <span class="tag is-black">Ctrl+Enter</span> is pressed.</p>
+
+      <h3>Format</h3>
+
+      <p>Query format is:</p>
+
+      <pre>&lt;verb> &lt;path>
+&lt;optional body></pre>
+
+      <p>example</p>
+
+      <pre>GET :index/:type/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}</pre>
+
+      <hr>
+
+      <h1>Feedback</h1>
+
+      Please log feature requests or bug <a href="https://github.com/khoan/sense/issues">here</a>.
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>eShell</strong> by <a href="http://github.com/khoan">Khoa Nguyen</a>. The source code is licensed
+          <a href="https://raw.githubusercontent.com/khoan/sense/master/LICENSE">MIT</a>. The website content
+          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+        </p>
+        <p>
+          <a class="icon" href="https://github.com/khoan/sense">
+            <i class="fa fa-github"></i>
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
